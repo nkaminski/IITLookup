@@ -14,4 +14,4 @@ Example Usage:
         >>> i.inquiryByCard("5_DIGIT_CARD_NUMBER")
         {'Block Meals': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'Auxiliary Points': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'Kent Printing': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'Bonus Points': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'LaundryCash': {'blocked': False, 'balance': 100.0, 'limit': 0.0}, 'TechCash': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'Sodexo Rewards': {'blocked': False, 'balance': 0.0, 'limit': 0.0}}
 
-All methods will return None if the requested record is not found
+All methods will return None if the requested record is not found.
