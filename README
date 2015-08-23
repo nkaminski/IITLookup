@@ -1,0 +1,17 @@
+A Python 3 class for interacting with a subset of the most interesting methods exposed by the IIT Residence and Greek Life web API.
+
+Requirements: Python 3.x (may work on 2.x but untested on such), pysimplesoap >= 1.10
+
+Example Usage:
+        >>> from IITLookup import IITLookup
+        >>> i = IITLookup("API_URL")
+        >>> i.nameByID("A_NUMBER")
+        {'first_name': 'Nash', 'middle_name': 'K.', 'last_name': 'Kaminski', 'id_number': 'A_NUMBER'}
+        >>> i.nameIDByCard("5_DIGIT_CARD_NUMBER")
+        {'first_name': 'Nash', 'middle_name': 'K.', 'idnumber': 'A_NUMBER', 'last_name': 'Kaminski'}
+        >>> i.inquiryByID("A_NUMBER")
+        {'Block Meals': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'Auxiliary Points': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'Kent Printing': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'Bonus Points': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'LaundryCash': {'blocked': False, 'balance': 100.0, 'limit': 0.0}, 'TechCash': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'Sodexo Rewards': {'blocked': False, 'balance': 0.0, 'limit': 0.0}}
+        >>> i.inquiryByCard("5_DIGIT_CARD_NUMBER")
+        {'Block Meals': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'Auxiliary Points': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'Kent Printing': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'Bonus Points': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'LaundryCash': {'blocked': False, 'balance': 100.0, 'limit': 0.0}, 'TechCash': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'Sodexo Rewards': {'blocked': False, 'balance': 0.0, 'limit': 0.0}}
+
+All methods will return None if the requested record is not found
