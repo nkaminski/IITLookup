@@ -14,7 +14,7 @@ Example Usage (A_NUMBER, 5_DIGIT_CARD_NUMBER and API_URL are substitutions of th
         >>> i.inquiryByCard("5_DIGIT_CARD_NUMBER")
         {'Block Meals': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'Auxiliary Points': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'Kent Printing': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'Bonus Points': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'LaundryCash': {'blocked': False, 'balance': 100.0, 'limit': 0.0}, 'TechCash': {'blocked': False, 'balance': 0.0, 'limit': 0.0}, 'Sodexo Rewards': {'blocked': False, 'balance': 0.0, 'limit': 0.0}}
 
-Also included is an implementation of the same accessor functions that interact directly with a MySQL/MariaDB instance of the user's choosing in IITLookupLocal.py Two additional functions, insertRecord and deleteRecord are also implemented in the local version only to assist with updating the database records. Usage is as follows:
+Also included is an implementation of the nameByID and nameIDByCard accessor functions that interact directly with a MySQL/MariaDB instance of the user's choosing in IITLookupLocal.py Two additional functions, insertRecord and deleteRecord are also implemented in the local version only to assist with updating the database records. Usage is as follows:
 
 <instance>.insertRecord('firstname','middlename','lastname','idnumber',cardnumber)
 <instance>.deleteRecord('idnumber')
