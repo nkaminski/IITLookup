@@ -1,8 +1,15 @@
 from pysimplesoap.client import SoapClient,SoapFault
+import base64
 class IITLookup:
 
-        def __init__(self, wsurl):
-                self.sclient=SoapClient(wsdl=wsurl)
+        def __init__(self, wsurl, user=None, pwd=None):
+                if(user or pwd):
+                    bts = ('%s:%s' % (user, pwd)).encode('ascii')
+                    auth = base64.b64encode(bts).replace(b'\n', b'')
+                    head = {'Authorization': "Basic %s" % auth.decode('ascii')}
+                    self.sclient=SoapClient(wsdl=wsurl, sessions=True, http_headers=head)
+                else:
+                    self.sclient=SoapClient(wsdl=wsurl)
 
         def nameByID(self,idnumber):
                 try:
