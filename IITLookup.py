@@ -2,7 +2,8 @@ from pysimplesoap.client import SoapClient,SoapFault
 import base64
 class IITLookup:
 
-        def __init__(self, wsurl, user=None, pwd=None):
+        def __init__(self, wsurl, user=None, pwd=None, idlength=6):
+                self.idlength=idlength
                 if(user or pwd):
                     bts = ('%s:%s' % (user, pwd)).encode('ascii')
                     auth = base64.b64encode(bts).replace(b'\n', b'')
@@ -18,12 +19,13 @@ class IITLookup:
                     return None
 
         def nameIDByCard(self,cardnum):
+                lookupstr = str(cardnum).zfill(self.idlength)
                 try:
-                    ret = self.sclient.PCSGetbyCardNum(cardNumber=cardnum)['PCSGetbyCardNumResult']
+                    ret = self.sclient.PCSGetbyCardNum(cardNumber=lookupstr)['PCSGetbyCardNumResult']
                 except SoapFault:
                     return None
                 if(ret == 'Not Found'):
-                        return None
+                    return None
                 ret = ret.split(',')
                 output = {}
                 output['last_name'] = ret[0]
