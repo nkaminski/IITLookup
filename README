@@ -1,6 +1,6 @@
 A Python 3 class for interacting with a subset of the most useful methods exposed by the CBORD Odyssey auxiliary web service.
 
-Requirements: Python 3.x (may work on 2.x but untested on such), pysimplesoap >= 1.10 (for standard version), mysqlclient (for local version)
+Requirements: Python 3.x (may work on 2.x but untested on such), pysimplesoap git commit 0001fcee or newer (for standard version), mysqlclient (for local version)
 
 Example Usage (A_NUMBER, 5_DIGIT_CARD_NUMBER and API_URL are substitutions of the actual values for privacy reasons):
         >>> from IITLookup import IITLookup
