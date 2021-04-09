@@ -1,28 +1,31 @@
-from pysimplesoap.client import SoapClient,SoapFault
-import base64
+from requests import Session, auth
+import zeep
+
+
 class IITLookup:
 
         def __init__(self, wsurl, user=None, pwd=None, idlength=6):
                 self.idlength=idlength
                 if(user or pwd):
-                    bts = ('%s:%s' % (user, pwd)).encode('ascii')
-                    auth = base64.b64encode(bts).replace(b'\n', b'')
-                    head = {'Authorization': "Basic %s" % auth.decode('ascii')}
-                    self.sclient=SoapClient(wsdl=wsurl, sessions=True, http_headers=head)
+                    session = Session()
+                    session.auth = auth.HTTPBasicAuth(user, pwd)
+                    self.sclient=zeep.Client(wsdl=wsurl, transport=zeep.Transport(session=session))
                 else:
-                    self.sclient=SoapClient(wsdl=wsurl)
+                    self.sclient=zeep.Client(wsdl=wsurl)
 
-        def nameByID(self,idnumber):
+        def nameByID(self, idnumber):
                 try:
-                    return self.sclient.PCSGetName(idNumber=idnumber)['PCSGetNameResult']
-                except SoapFault:
+                    return self.sclient.service.PCSGetName(idNumber=idnumber)
+                except zeep.exceptions.Error as zeep_error:
+                    print(zeep_error)
                     return None
 
         def nameIDByCard(self,cardnum):
                 lookupstr = str(cardnum).zfill(self.idlength)
                 try:
-                    ret = self.sclient.PCSGetbyCardNum(cardNumber=lookupstr)['PCSGetbyCardNumResult']
-                except SoapFault:
+                    ret = self.sclient.service.PCSGetbyCardNum(cardNumber=lookupstr)
+                except zeep.exceptions.Error as zeep_error:
+                    print(zeep_error)
                     return None
                 if(ret == 'Not Found'):
                     return None
