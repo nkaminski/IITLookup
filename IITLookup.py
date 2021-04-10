@@ -13,6 +13,21 @@ class IITLookup:
                 else:
                     self.sclient=zeep.Client(wsdl=wsurl)
 
+        def getServices(self):
+            for service in self.sclient.wsdl.services.values():
+                print(service)
+                for port in service.ports.values():
+                    print(port)
+                    try:
+                        operations = port.binding._operations.values()
+                        for operation in operations:
+                            print(operation.name)
+                            node = self.sclient.create_message(self.sclient.service, operation.name)
+                            print(node)
+                    except zeep.exceptions.Error as zeep_error:
+                        print(zeep_error)
+                        return None
+
         def nameByID(self, idnumber):
                 try:
                     return self.sclient.service.PCSGetName(idNumber=idnumber)
