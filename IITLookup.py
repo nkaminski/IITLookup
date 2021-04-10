@@ -51,25 +51,3 @@ class IITLookup:
                 output['middle_name'] = ret[2]
                 output['idnumber'] = ret[3]
                 return output
-
-        def inquiryByID(self,idnumber):
-                try:
-                    ret = self.sclient.PCSGetInquiry(idNumber=idnumber)['PCSGetInquiryResult']
-                except SoapFault:
-                    return None
-                output = {}
-                for x in ret:
-                    x = x['InquiryRecord']
-                    n_obj = {}
-                    n_obj['blocked'] = x['blocked']
-                    n_obj['limit'] = x['limit']
-                    n_obj['balance'] = x['balance']
-                    output[x['tender']] = n_obj
-                return output
-
-        def inquiryByCard(self,cardnum):
-                idn = self.nameIDByCard(cardnum)
-                if not idn:
-                        return None
-                return self.inquiryByID(idn['idnumber'])
-        
